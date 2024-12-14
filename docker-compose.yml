@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.0-pg17
+    container_name: pgvector-db
+    environment:
+      - POSTGRES_DB=testdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data-postgres:/var/lib/postgresql/data
+    user: "${UID}:${GID}"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8088:8080
