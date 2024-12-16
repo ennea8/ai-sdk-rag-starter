@@ -7,3 +7,4 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789");
+
